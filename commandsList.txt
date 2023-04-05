@@ -1,0 +1,33 @@
+client.on('interactionCreate', (interaction) => {
+    if (interaction.isChatInputCommand()) {
+        
+        if (interaction.commandName == 'embed') {
+            const embed = new EmbedBuilder()
+            .setTitle("Embed Title")
+            .setDescription('This is an embed description')
+            .setColor('Random')
+            .addFields({ name: 'Field Title', value: 'Some random value', inline: true })
+
+            interaction.reply({ embeds: [embed] })
+        }
+
+        if (interaction.commandName === 'add'){
+            const num1 = interaction.options.get('first-number')
+            const num2 = interaction.options.get('second-number')
+
+            interaction.reply(`The sum is ${num1.value + num2.value}`)
+        }
+    } 
+})
+
+
+client.on('messageCreate', (msg) => {
+    if (msg.author.bot){
+        return
+    }
+    else{
+        if (msg.content === 'hello') {
+            msg.reply('hello!')
+        }
+    }
+})
